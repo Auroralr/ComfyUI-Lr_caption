@@ -1,0 +1,576 @@
+{
+  "last_node_id": 50,
+  "last_link_id": 71,
+  "nodes": [
+    {
+      "id": 44,
+      "type": "UNETLoader",
+      "pos": {
+        "0": -326,
+        "1": -21
+      },
+      "size": {
+        "0": 315,
+        "1": 82
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            67
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "FLUX1/flux1-dev-fp8.safetensors",
+        "fp8_e4m3fn"
+      ]
+    },
+    {
+      "id": 45,
+      "type": "VAEDecode",
+      "pos": {
+        "0": -736,
+        "1": 676
+      },
+      "size": {
+        "0": 401.697998046875,
+        "1": 46
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 69
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 68
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            70
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 43,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": -321,
+        "1": 200
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            66
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        1024,
+        1
+      ]
+    },
+    {
+      "id": 12,
+      "type": "PreviewImage",
+      "pos": {
+        "0": -1067,
+        "1": 433
+      },
+      "size": {
+        "0": 317.1487731933594,
+        "1": 295.9697265625
+      },
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 70
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 40,
+      "type": "Lr_Lr_caption_load",
+      "pos": {
+        "0": -1072,
+        "1": -25
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LrPipeline",
+          "type": "LrPipeline",
+          "links": [
+            58
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Lr_Lr_caption_load"
+      },
+      "widgets_values": [
+        "unsloth/Llama-3.2-11B-Vision-Instruct-bnb-4bit"
+      ]
+    },
+    {
+      "id": 15,
+      "type": "LoadImage",
+      "pos": {
+        "0": -1069,
+        "1": 84
+      },
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            59
+          ],
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "lzz.png",
+        "image"
+      ]
+    },
+    {
+      "id": 47,
+      "type": "DualCLIPLoader",
+      "pos": {
+        "0": -319,
+        "1": 341
+      },
+      "size": {
+        "0": 315,
+        "1": 106
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            63
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DualCLIPLoader"
+      },
+      "widgets_values": [
+        "long_clip/clip_l.safetensors",
+        "t5/t5xxl_fp16.safetensors",
+        "flux"
+      ]
+    },
+    {
+      "id": 39,
+      "type": "Lr_caption",
+      "pos": {
+        "0": -742,
+        "1": -24
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "Lr_pipeline",
+          "type": "LrPipeline",
+          "link": 58
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 59
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            60
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Lr_caption"
+      },
+      "widgets_values": [
+        "caption",
+        "A descriptive caption for this image",
+        256,
+        0.7,
+        true
+      ]
+    },
+    {
+      "id": 46,
+      "type": "VAELoader",
+      "pos": {
+        "0": -323,
+        "1": 107
+      },
+      "size": {
+        "0": 315,
+        "1": 58
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            68
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.safetensors"
+      ]
+    },
+    {
+      "id": 34,
+      "type": "easy showAnything",
+      "pos": {
+        "0": -744,
+        "1": 229
+      },
+      "size": {
+        "0": 411.60101318359375,
+        "1": 246.06263732910156
+      },
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "anything",
+          "type": "*",
+          "link": 60,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "*",
+          "links": [
+            71
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy showAnything"
+      },
+      "widgets_values": [
+        "The image depicts a digital illustration of a female warrior, likely from a fantasy setting, with short, purple hair and a sword at her side. The image is rendered in a monochromatic blue color scheme. A female warrior: Short, purple hair\n\t Serious expression\n\t Wearing armor and a cape\n\t Holding a sword in her right hand\n\t Left arm bent at the elbow, with the hand resting on her hip\n A sword: Long and slender\n\t Held in the warrior's right hand\n\t Pointed tip\n\t Scabbard or sheath attached to the warrior's belt\n Armor: Breastplate\n\t Shoulder guards\n\t Arm guards\n\t Belt\n\t Cape\n\t All made of metal, with intricate designs\n\nThe image presents a detailed and stylized representation of a female warrior, with a focus on her attire and equipment. The use of a monochromatic color scheme adds to the overall sense of intensity and determination conveyed by the character. "
+      ]
+    },
+    {
+      "id": 50,
+      "type": "FluxSamplerParams+",
+      "pos": {
+        "0": -320,
+        "1": 487
+      },
+      "size": {
+        "0": 315.08782958984375,
+        "1": 286
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 67
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 65
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 66
+        },
+        {
+          "name": "loras",
+          "type": "LORA_PARAMS",
+          "link": null,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            69
+          ]
+        },
+        {
+          "name": "params",
+          "type": "SAMPLER_PARAMS",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "FluxSamplerParams+"
+      },
+      "widgets_values": [
+        "?",
+        "euler",
+        "simple",
+        "20",
+        "3.5",
+        "",
+        "",
+        "1.0"
+      ]
+    },
+    {
+      "id": 49,
+      "type": "CLIPTextEncodeFlux",
+      "pos": {
+        "0": -739,
+        "1": 516
+      },
+      "size": {
+        "0": 403.6872253417969,
+        "1": 120
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 63
+        },
+        {
+          "name": "clip_l",
+          "type": "STRING",
+          "link": 71,
+          "widget": {
+            "name": "clip_l"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            65
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncodeFlux"
+      },
+      "widgets_values": [
+        "",
+        "",
+        3.5
+      ]
+    }
+  ],
+  "links": [
+    [
+      58,
+      40,
+      0,
+      39,
+      0,
+      "LrPipeline"
+    ],
+    [
+      59,
+      15,
+      0,
+      39,
+      1,
+      "IMAGE"
+    ],
+    [
+      60,
+      39,
+      0,
+      34,
+      0,
+      "*"
+    ],
+    [
+      63,
+      47,
+      0,
+      49,
+      0,
+      "CLIP"
+    ],
+    [
+      65,
+      49,
+      0,
+      50,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      66,
+      43,
+      0,
+      50,
+      2,
+      "LATENT"
+    ],
+    [
+      67,
+      44,
+      0,
+      50,
+      0,
+      "MODEL"
+    ],
+    [
+      68,
+      46,
+      0,
+      45,
+      1,
+      "VAE"
+    ],
+    [
+      69,
+      50,
+      0,
+      45,
+      0,
+      "LATENT"
+    ],
+    [
+      70,
+      45,
+      0,
+      12,
+      0,
+      "IMAGE"
+    ],
+    [
+      71,
+      34,
+      0,
+      49,
+      1,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.5054470284993169,
+      "offset": [
+        1347.3205785602097,
+        122.57913686086104
+      ]
+    }
+  },
+  "version": 0.4
+}
