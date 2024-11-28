@@ -2,6 +2,7 @@
   
   - *基于Llama 3.2-Vision 多模态大语言模型 ( LLMs ) 是预训练和指令调整的图像推理生成模型的集合，大小为 11B 和 90B（文本 + 图像输入/文本输出）。*
   - *Llama 3.2-Vision 指令调整模型针对视觉识别、图像推理、字幕和回答有关图像的一般问题进行了优化。*
+  > **注意** transformers >= 4.46.3
   
 ![Node picture demonstration](test.png "Lr_caption&&load")
 ## Installation
